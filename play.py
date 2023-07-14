@@ -1,4 +1,6 @@
 import os
+import random
+import platform
 
 #the original mat
 mat = [
@@ -67,14 +69,24 @@ def draw(*args):
 #--------------TO-DO---------------------------
 #   here I should implement the algorithm of playing the tic-tac-toe 
 
-def getMove():
-    mop=(op+1)%2
+# TO-DO: implement minimax algorithm
+def getMoveHard():
+    return
 
-    return 0
+# let the pc play it randomly
+def getMoveEasy():
+    mop=(op+1)%2
+    index = random.randint(0, 9)
+    while mat[index]=='O' or mat[index]=='X':
+        index = random.randint(0, 9)
+    return index
 ###################################################
 #here we print the game with the updated values
 def display():
-    os.system('cls')
+    if platform.system()=='windows':
+        os.system('cls')
+    else:
+        os.system('clear')
     print(str(mat[0])+" | "+str(mat[1])+" | "+str(mat[2])+"\n---------\n"+str(mat[3])+" | "+str(mat[4])+" | "+str(mat[5])+"\n---------\n"+str(mat[6])+" | "+str(mat[7])+" | "+str(mat[8])+"\n")
     return 0
 ###################################################
@@ -89,7 +101,7 @@ display()
 if op==1:
     mat[getOpponent()]='X'
 while True:
-    val= getMove()
+    val= getMoveEasy()
     if op ==1:  
         mat[val]='O'
     else:
